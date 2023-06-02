@@ -1,4 +1,20 @@
+import { useState, useEffect } from "react"
+
 export default function Page2() {
+
+    const [itemList, setItemList] = useState([])
+
+    useEffect(() => {
+        displayItems()
+    }, [])
+
+    const displayItems = async () => {
+        await fetch("http://localhost:3001/api/items", {
+            method: 'GET'
+        }).then(res => res.json())
+          .then(data => setItemList(data))
+    }
+
     return(
         <div className="page2">
             <div className='page2-header'>
@@ -12,111 +28,33 @@ export default function Page2() {
                 </div>
             </div>
             <div id="container" className="page2-item-container">
-            <div className="item">
-                    <div className="item-img" style={{ marginTop: '7px', backgroundImage: 'url(/Chicken-Shish-Kebab-with-Lemon-Rice-Featured-2-removebg-preview.png)', backgroundSize: 'cover'}}>
-                    </div>
-                    <div className="item-content">
-                    <div className="item-cart-btn">
-                        <img src="/cart.png" width={'50px'} style={{marginLeft: '0px'}}></img>
-                    </div>
-                        <div className="item-title">
-                            Concord Grapes
-                            <div className="item-price">
-                                <span style={{color: 'red'}}>$</span> 5.25
+            {
+                    itemList.map((item) => {
+                        return(
+                            <div className="item">
+                                <div className="ITEM-IMG">
+                                    <img src={`http://localhost:3001/${item.cover}`} width={'200px'} sty></img>
+                                </div>
+                                <div className="ITEM-CONTENT">
+                                    <div className="item-cart-btn">
+                                        <img src="/cart.png"></img>
+                                    </div>
+                                    <div>
+                                        <div className="item-title">
+                                            {item.title}
+                                        </div>
+                                        <div className='item-sub-title'>
+                                            {item.subTitle}
+                                        </div>
+                                        <div className="item-price">
+                                            <span style={{color: 'red'}}>$</span> {item.price}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="item">
-                    <div className="item-img" style={{ marginTop: '7px', backgroundImage: 'url(/parve-vanilla-chocolate-430x430.png)', backgroundSize: 'cover'}}>
-                    </div>
-                    <div className="item-content">
-                    <div className="item-cart-btn">
-                        <img src="/cart.png" width={'50px'} style={{marginLeft: '0px'}}></img>
-                    </div>
-                    <div className="item-title">
-                            Concord Grapes
-                            <div className="item-price">
-                                <span style={{color: 'red'}}>$</span> 5.25
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="item">
-                    <div className="item-img" style={{ marginTop: '7px', backgroundImage: 'url(/strawberries-removebg-preview.png)', backgroundSize: 'cover'}}>
-                    </div>
-                    <div className="item-content">
-                    <div className="item-cart-btn">
-                        <img src="/cart.png" width={'50px'} style={{marginLeft: '0px'}}></img>
-                    </div>
-                    <div className="item-title">
-                            Concord Grapes
-                            <div className="item-price">
-                                <span style={{color: 'red'}}>$</span> 5.25
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="item">
-                    <div className="item-img" style={{ marginTop: '7px', backgroundImage: 'url(/air-fryer-tilapia-2-removebg-preview.png)', backgroundSize: 'cover'}}>
-                    </div>
-                    <div className="item-content">
-                    <div className="item-cart-btn">
-                        <img src="/cart.png" width={'50px'} style={{marginLeft: '0px'}}></img>
-                    </div>
-                    <div className="item-title">
-                            Concord Grapes
-                            <div className="item-price">
-                                <span style={{color: 'red'}}>$</span> 5.25
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="item">
-                    <div className="item-img" style={{ marginTop: '7px', backgroundImage: 'url(/air-fryer-tilapia-2-removebg-preview.png)', backgroundSize: 'cover'}}>
-                    </div>
-                    <div className="item-content">
-                    <div className="item-cart-btn">
-                        <img src="/cart.png" width={'50px'} style={{marginLeft: '0px'}}></img>
-                    </div>
-                    <div className="item-title">
-                            Concord Grapes
-                            <div className="item-price">
-                                <span style={{color: 'red'}}>$</span> 5.25
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="item">
-                    <div className="item-img" style={{ marginTop: '7px', backgroundImage: 'url(/raspberry.png)', backgroundSize: 'cover'}}>
-                    </div>
-                    <div className="item-content">
-                    <div className="item-cart-btn">
-                        <img src="/cart.png" width={'50px'} style={{marginLeft: '0px'}}></img>
-                    </div>
-                    <div className="item-title">
-                            Concord Grapes
-                            <div className="item-price">
-                                <span style={{color: 'red'}}>$</span> 5.25
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="item">
-                    <div className="item-img" style={{ marginTop: '7px', backgroundImage: 'url(/grapes.png)', backgroundSize: 'cover'}}>
-                    </div>
-                    <div className="item-content">
-                    <div className="item-cart-btn">
-                        <img src="/cart.png" width={'50px'} style={{marginLeft: '0px'}}></img>
-                    </div>
-                    <div className="item-title">
-                            Concord Grapes
-                            <div className="item-price">
-                                <span style={{color: 'red'}}>$</span> 5.25
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        )
+                    })
+                }
             </div>
 
         </div>

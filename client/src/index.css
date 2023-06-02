@@ -28,7 +28,8 @@ code {
 }
 
 .header {
-  width: 90%;
+  width: 100%;
+  margin-left: -75px;
   position: fixed;
   background-color: #F5F3F3;
 
@@ -53,6 +54,7 @@ nav {
   align-items: center;
   margin-top: 20px;
   width: 80%;
+  margin-left: 90px;
 }
 
 .nav-content {
@@ -66,6 +68,77 @@ nav {
 
 } */
 
+.login-btn {
+  padding: 10px;
+  width: 100px;
+  background-color: white;
+  border: 2px solid #9FA1AC;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  border: 3px solid #9FA1AC;
+
+}
+
+.signin-image {
+  width: 60%;
+  height: 650px;
+}
+
+.signin-container {
+  width: 40%;
+  height: 650px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.signin-container input{
+  padding: 10px;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 0;
+}
+
+.signin-container ::placeholder {
+  font-weight: 700;
+  letter-spacing: 2px
+}
+
+.signin-container button {
+  width: 400px;
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #FA7B20 ;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  color:white;
+}
+
+.signin-container button:hover {
+  cursor: pointer;
+}
+
+.section {
+  width: 100%;
+  height: 36px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.section button {
+  width: 100%;
+  background-color:#F38840;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+}
+
 .hero {
   background: #F5F3F3;
   padding: 40px;
@@ -76,10 +149,9 @@ nav {
 
 .delivery {
   background: #FFEDD5;
-  width: fit-content;
+  width: 200px;
   padding: 5px;
   padding-left: 20px;
-  width: 20%;
   border-radius: 30px;
   font-weight: 700;
   color: #FA822E
@@ -102,9 +174,10 @@ nav {
 
 .order-btn {
   background: #FA7B20;
-  width: 15%;
+  width: 200px;
   padding: 10px;
   border-radius: 10px;
+  text-align: center;
 
 }
 
@@ -232,8 +305,8 @@ hr {
 }
 
 .page2-item-container {
-  margin-top: 80px;
-  height: 250px;
+  margin-top: 20px;
+  height: 300px;
   background: #F5EEE9;
   display: flex;
   overflow-x: scroll;
@@ -256,8 +329,7 @@ hr {
 
 .item-content {
   margin-top: 30px;
-  margin-left: 30px;
-  margin-right: 20px;
+  background-color: red;
 }
 
 .item-title {
@@ -354,6 +426,10 @@ hr {
   cursor: pointer;
 }
 
+.item-content {
+  margin-left: 20px
+}
+
 .item-container {
   background-color: #F5EEE9;
   display: flex;
@@ -367,14 +443,120 @@ hr {
   margin-left: 30px;
 }
 
+.profile-container {
+  padding-top: 10px;
+  margin-top: 10px;
+  border: 3px solid lightgray;
+  border-radius: 10px;
+  width: 50%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-container input[type=text] {
+  width: 600px;
+  padding: 10px;
+  border: 0;
+  font-size: 16px;
+}
+
+.profile-container input, .profile-container button{
+  margin-top: 20px;
+}
+
+.profile-container button {
+  width: 600px;
+  padding: 10px;
+  background-color: #FA822E;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.5s;
+}
+
+.profile-container button:hover {
+  cursor: pointer;
+  background: rgba(250, 130, 46, 0.7);
+}
+
+.profile-container button:active {
+  box-shadow: none;
+  background: rgba(250, 130, 46, 1);
+}
+
+
+.profile-image {
+  margin-top: 20px;
+  width: 350px;
+  height: 350px;
+}
+
+
+.item-form, .category-form {
+  width: 600px;
+  margin-bottom: 50px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.item-form hr, .category-form hr {
+  height: 1px;
+  width: 100%;
+  background: #9FA1AC;
+
+}
+
+.category-form {
+  height: 250px;
+}
+
+.ITEM-IMG {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ITEM-CONTENT {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-form button, .category-form button {
+  width: 560px;
+  margin-top: 10px;
+  border: 0;
+}
+
+.stock-table {
+  margin-bottom: 50px;
+}
 
 @media screen and (max-width: 600px) {
 
   .header {
+    margin-left: -20px;
     font-size: 14px;
-    width: 300px;
+    width: 375px;
     display: flex;
     justify-content: center;
+  }
+
+  .header h1 {
+    margin-left: -30px;
+  }
+
+  .header .profile {
+    margin-right: 20px
   }
 
   .nav-content {

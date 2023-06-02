@@ -1,0 +1,19 @@
+POST http://localhost:3001/api/user/signup
+Content-Type: application/json
+
+{
+    "username": "aaranDeeshon",
+    "password": "nyctophile101"
+}
+
+###
+POST http://localhost:3001/api/categories
+Content-Type: application/json
+
+{
+    "title": "Chicken"
+}
+
+
+###
+GET http://localhost:3001/api/categories
