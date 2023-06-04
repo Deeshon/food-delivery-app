@@ -6,6 +6,9 @@ const CategorySchema = new Schema({
         type: String,
         required: true
     },
+    cover: {
+        type: String
+    }
 })
 
 const Category = mongoose.model("Category", CategorySchema)

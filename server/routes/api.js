@@ -7,7 +7,10 @@ const fs = require('fs')
 const User = require('../models/User')
 const Category = require('../models/Category')
 const Item = require("../models/Item")
+const Cart = require("../models/Cart")
 const router = express.Router()
+const stripe = require('stripe')('sk_test_51NFJyuSBfUGouUODjmvNFh8CngEE0CYilk41wpTUNWMpn0mwquzvgh74DsfJKX4D0ovm65SQv4mBfkemAGkOGIbx00h67BFhAL')
+
 
 const salt = bcrypt.genSaltSync(10)
 
@@ -41,12 +44,23 @@ router.post('/user/signin', async (req, res) => {
     }
 })
 
-router.get('/user/profile', async (req, res) => {
+router.get('/user/profile', (req, res) => {
     const {token} = req.cookies
-    jwt.verify(token, 'secretkey', {}, (err, authData) => {
-        if (err) throw err
-        res.json(authData)
-    })
+    if (token) {
+        jwt.verify(token, 'secretkey', {}, (err, authData) => {
+            if (err) throw err
+            res.json(authData)
+        })
+    } else {
+        res.json("ok")
+    }
+
+
+})
+
+// POST req for logging user out
+router.post('/user/logout', async (req, res) => {
+    res.cookie('token', '').json('ok')
 })
 
 
@@ -70,6 +84,16 @@ router.get("/categories", async (req, res) => {
 
     res.json(categoryList)
 })
+
+// POST req for filtering items by category
+router.post("/category/items", async (req, res) => {
+    const items = await Item.find({category: req.body.category})
+
+    res.json(items)
+})
+
+
+// ITEM ROUTES //
 
 
 // POST req for creating item
@@ -95,13 +119,61 @@ router.post("/items", upload.single('cover'), async (req, res) => {
 
 // GET req for item list
 router.get('/items', async (req, res) => {
-    const itemList = await Item.find()
+    const itemList = await Item.find().populate('category')
 
     res.json(itemList)
-
-
 })
 
+
+// ROUTES FOR CART //
+
+// POST req for adding items to cart
+router.post("/cart/item", async (req, res) => {
+    const cartItem = new Cart({
+        item: req.body.item
+    })
+
+    await cartItem.save()
+
+    res.json(cartItem)
+})
+
+// GET req for cart items
+router.get("/cart", async (req, res) => {
+    const cartItems = await Cart.find().populate("item")
+
+    res.json(cartItems)
+})
+
+// DELETE req to clear cart
+router.delete("/cart", async (req, res) => {
+    await Cart.deleteMany({})
+    res.json('ok')
+})
+
+// ROUTE FOR STRIPE PAYMENT //
+router.post('/create-checkout-session', async (req, res) => {
+    const line_items = req.body.data.cart.map((item) => {
+        return{
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                  name: item.item.title
+                },
+                unit_amount: item.item.price * 100
+              },
+              quantity: 1,
+        }
+    })
+    const session = await stripe.checkout.sessions.create({
+      line_items,
+      mode: 'payment',
+      success_url: 'http://localhost:3000/payment/success',
+      cancel_url: 'http://localhost:3000/payment/success',
+    });
+  
+    res.send({url: session.url});
+  });
 
 
 module.exports = router

@@ -8,6 +8,8 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Stock from "./pages/Stock"
 import { UserContextProvider } from "./UserContext";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentFail from "./pages/PaymentFail";
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
             <Route path='/signup' element={<Signup />}></Route>
             <Route path='/profile/:id' element={<Profile />}></Route>
             <Route path='/stock' element={<Stock />}></Route>
+            <Route path='/payment/success' element={<PaymentSuccess />}></Route>
+            <Route path='/payment/fail' element={<PaymentFail />}></Route>
           </Route>
         </Routes>
       </UserContextProvider>

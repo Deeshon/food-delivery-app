@@ -17,3 +17,27 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3001/api/categories
+
+
+###
+POST http://localhost:3001/api/category/items
+Content-Type: application/json
+
+{
+    "category": "647a3f74d07853673e15d55c"
+}
+
+###
+POST http://localhost:3001/api/cart/item
+Content-Type: application/json
+
+{
+    "item": "647a4f471d5437b6d4536761"
+}
+
+###
+GET http://localhost:3001/api/cart
+
+
+## 
+DELETE http://localhost:3001/api/cart

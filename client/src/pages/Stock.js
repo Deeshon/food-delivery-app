@@ -172,8 +172,8 @@ export default function Stock() {
                         <tr>
                             <th scope="col">Product id</th>
                             <th scope="col">Product Name</th>
+                            <th scope="col">Product Category</th>
                             <th scope="col">Regular Price</th>
-                            <th scope="col">Stock Quantity</th>
                             <th scope="col">Edit</th>
                         </tr>
                     </thead>
@@ -184,8 +184,8 @@ export default function Stock() {
                                     <tr>
                                         <th scope="row">{item._id}</th>
                                         <td>{item.title}</td>
+                                        <td>{item.category.title}</td>
                                         <td>$ {item.price}</td>
-                                        <td>12</td>
                                         <td>📝</td>
                                     </tr>
                                 )
